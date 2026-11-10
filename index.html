@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FAIRmat QR Codes</title>
+<meta name="description" content="Make QR codes in the FAIRmat house style, with the FAIRmat or a team logo in the centre.">
+<link rel="icon" href="logos/fairmat.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="bar">
+  <div class="bar-in">
+    <img src="logos/fairmat.svg" alt="FAIRmat">
+    <span class="sep" aria-hidden="true"></span>
+    <h1>QR codes</h1>
+  </div>
+</header>
+
+<main>
+  <div class="layout">
+    <section class="form" aria-label="QR code settings">
+      <div class="row">
+        <label for="link">Link</label>
+        <input id="link" type="url" inputmode="url" autocomplete="off" spellcheck="false" value="https://www.fairmat-nfdi.eu/fairmat/events-fairmat">
+        <p class="hint" id="linkHint">Shorter links give simpler codes that scan faster.</p>
+      </div>
+
+      <div class="row">
+        <span class="lbl" id="logoLabel">Logo</span>
+        <div class="chips" id="logos" role="group" aria-labelledby="logoLabel"></div>
+        <button class="linkbtn" id="addLogo" type="button">Use another logo</button>
+        <div class="addbox" id="addBox" hidden>
+          <input id="logoFile" type="file" accept="image/svg+xml,image/png,image/jpeg,image/webp" aria-label="Logo file">
+          <p class="note">The logo stays in your browser and is not uploaded anywhere. Use the official file, SVG or PNG with a transparent background.</p>
+          <div class="actions">
+            <button class="btn" id="useOnce" type="button">Use this logo</button>
+            <button class="btn ghost" id="cancelAdd" type="button">Cancel</button>
+          </div>
+          <p class="msg" id="addMsg"></p>
+        </div>
+      </div>
+
+      <div class="row">
+        <span class="lbl" id="colorLabel">Corner colour</span>
+        <div class="swatches" id="swatches" role="group" aria-labelledby="colorLabel"></div>
+        <p class="hint">Green for NOMAD Oasis, gold for NOMAD CAMELS, blue for everything else.</p>
+      </div>
+    </section>
+
+    <aside class="preview" aria-label="Preview">
+      <div class="stage"><div class="card" id="card"></div></div>
+      <div class="out">
+        <div class="status wait" id="status"><span class="dot"></span><span id="statusText">Checking that it scans…</span></div>
+        <div class="actions">
+          <button class="btn" id="dlPng" type="button">Download PNG</button>
+          <button class="btn ghost" id="dlSvg" type="button">Download SVG</button>
+        </div>
+        <p class="msg" id="dlMsg"></p>
+        <p class="meta" id="meta"></p>
+      </div>
+    </aside>
+  </div>
+  <p class="foot">Every code uses the highest error correction and is read back by a scanner before it can be downloaded. Nothing you type leaves your browser.</p>
+</main>
+
+<script src="vendor/qrcode.js"></script>
+<script src="vendor/jsQR.js"></script>
+<script src="logos/logos.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
