@@ -6,7 +6,7 @@
 <title>FAIRmat QR Codes</title>
 <meta name="description" content="Make QR codes in the FAIRmat house style, with the FAIRmat or a team logo in the centre.">
 <link rel="icon" href="logos/fairmat.svg" type="image/svg+xml">
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/style.css?v=2">
 </head>
 <body>
 <header class="bar">
@@ -22,8 +22,16 @@
     <section class="form" aria-label="QR code settings">
       <div class="row">
         <label for="link">Link</label>
-        <input id="link" type="url" inputmode="url" autocomplete="off" spellcheck="false" value="https://www.fairmat-nfdi.eu/fairmat/events-fairmat">
+        <input id="link" type="url" inputmode="url" autocomplete="off" spellcheck="false" value="https://nomad-lab.eu/">
         <p class="hint" id="linkHint">Shorter links give simpler codes that scan faster.</p>
+        <span class="lbl" id="quickLinksLabel">Quick access links</span>
+        <div class="quick-links" role="group" aria-labelledby="quickLinksLabel">
+          <button class="btn ghost" type="button" data-quick-link="https://nomad-lab.eu/" data-logo="nomad">NOMAD CENTRAL</button>
+          <button class="btn ghost" type="button" data-quick-link="https://about.nomad-lab.eu/" data-logo="nomad">NOMAD WEBSITE</button>
+          <button class="btn ghost" type="button" data-quick-link="https://www.fairmat-nfdi.eu/fairmat" data-logo="fairmat">FAIRMAT WEBSITE</button>
+          <button class="btn ghost" type="button" data-quick-link="https://discord.gg/Se9qHracC8" data-logo="discord">DISCORD JOIN LINK</button>
+        </div>
+        <p class="hint">Each shortcut sets the link, logo and corner colour.</p>
       </div>
 
       <div class="row">
@@ -44,7 +52,7 @@
       <div class="row">
         <span class="lbl" id="colorLabel">Corner colour</span>
         <div class="swatches" id="swatches" role="group" aria-labelledby="colorLabel"></div>
-        <p class="hint">Green for NOMAD Oasis, gold for NOMAD CAMELS, blue for everything else.</p>
+        <p class="hint">Choosing a logo sets its corner colour automatically. You can also choose a different colour here.</p>
       </div>
     </section>
 
@@ -66,7 +74,7 @@
 
 <script src="vendor/qrcode.js"></script>
 <script src="vendor/jsQR.js"></script>
-<script src="logos/logos.js"></script>
-<script src="js/app.js"></script>
+<script src="logos/logos.js?v=7"></script>
+<script src="js/app.js?v=9"></script>
 </body>
 </html>

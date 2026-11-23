@@ -3,18 +3,20 @@
   "use strict";
 
   const NAVY = "#16204A";
-  const INK = "#4256A6";
+  const INK = "#2A4CDF";
   const ACCENTS = ["#273A81", "#4F82C3", "#BF8A2E", "#038D6A"];
   const COLORS = [
-    { id: "blue", name: "Blue", hex: "#4256A6" },
-    { id: "green", name: "Oasis", hex: "#008A67" },
+    { id: "blue", name: "Blue", hex: "#2A4CDF" },
+    { id: "green", name: "OASIS", hex: "#008A67" },
     { id: "gold", name: "CAMELS", hex: "#BF8A36" },
+    { id: "plugins", name: "PLUGINS", hex: "#4186E0" },
     { id: "navy", name: "Navy", hex: "#16204A" },
   ];
-  const TEAM = (window.FAIRMAT_LOGOS || []).map((l, i) => ({ id: "team" + i, name: l.name, src: "logos/" + l.file }));
+  const TEAM = (window.FAIRMAT_LOGOS || []).map((l, i) => ({ id: l.id || "team" + i, name: l.name, src: "logos/" + l.file, cornerColor: l.cornerColor || "blue" }));
 
   const $ = (id) => document.getElementById(id);
-  const state = { link: "", logo: TEAM.length ? TEAM[0].id : "none", color: "blue", local: null, dataUrls: {}, svg: "", ok: false };
+  const DEFAULT_LOGO = TEAM.find((t) => t.id === "nomad") || TEAM[0];
+  const state = { link: "", logo: DEFAULT_LOGO ? DEFAULT_LOGO.id : "none", color: DEFAULT_LOGO ? DEFAULT_LOGO.cornerColor : "blue", local: null, dataUrls: {}, svg: "", ok: false };
 
   // ---------- QR drawing: connected bubbles ----------
   const utf8 = (s) => unescape(encodeURIComponent(s));
@@ -127,13 +129,19 @@
   }
 
   // ---------- controls ----------
+  function selectLogo(id) {
+    state.logo = id;
+    const team = TEAM.find((t) => t.id === id);
+    if (team) state.color = team.cornerColor;
+    drawChips(); drawSwatches();
+  }
   function chip(id, name, thumb) {
     const b = document.createElement("button"); b.type = "button"; b.className = "chip"; b.setAttribute("aria-pressed", String(state.logo === id));
     const t = document.createElement("span"); t.className = "thumb" + (thumb ? "" : " none");
     if (thumb) { const im = document.createElement("img"); im.src = thumb; im.alt = ""; t.appendChild(im); } else t.textContent = "None";
     const l = document.createElement("span"); l.textContent = name;
     b.append(t, l);
-    b.addEventListener("click", () => { state.logo = id; drawChips(); render(); });
+    b.addEventListener("click", () => { selectLogo(id); render(); });
     return b;
   }
   function drawChips() {
@@ -152,7 +160,17 @@
   }
 
   const link = $("link"); let linkTimer;
-  link.addEventListener("input", () => { clearTimeout(linkTimer); linkTimer = setTimeout(() => { state.link = link.value.trim(); hintLink(); render(); }, 180); });
+  function updateLink() { state.link = link.value.trim(); hintLink(); render(); }
+  link.addEventListener("input", () => { clearTimeout(linkTimer); linkTimer = setTimeout(updateLink, 180); });
+  document.querySelectorAll("[data-quick-link]").forEach((button) => {
+    button.addEventListener("click", () => {
+      clearTimeout(linkTimer);
+      link.value = button.dataset.quickLink;
+      const team = TEAM.find((t) => t.id === button.dataset.logo);
+      if (team) selectLogo(team.id);
+      updateLink();
+    });
+  });
   function hintLink() {
     $("linkHint").textContent = state.link && !/^https?:\/\//i.test(state.link)
       ? "This doesn't start with https://, so phones may treat it as plain text." : "Shorter links give simpler codes that scan faster.";
