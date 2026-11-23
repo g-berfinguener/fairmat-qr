@@ -4,8 +4,10 @@
 // Keep the commas and quotes exactly like the FAIRmat line.
 
 window.FAIRMAT_LOGOS = [
-  { name: "FAIRmat", file: "fairmat.svg" },
-  // { name: "NOMAD", file: "nomad.svg" },
-  // { name: "NOMAD Oasis", file: "nomad-oasis.svg" },
-  // { name: "NOMAD CAMELS", file: "nomad-camels.svg" },
+  { id: "fairmat", name: "FAIRmat", file: "fairmat.svg", cornerColor: "blue" },
+  { id: "nomad", name: "NOMAD", file: "nomad.svg", cornerColor: "blue" },
+  { id: "nomad-oasis", name: "NOMAD OASIS", file: "nomad-oasis.svg", cornerColor: "green" },
+  { id: "nomad-camels", name: "NOMAD CAMELS", file: "nomad-camels.svg", cornerColor: "gold" },
+  { id: "nomad-plugins", name: "NOMAD PLUGINS", file: "nomad-plugins.svg", cornerColor: "plugins" },
+  { id: "discord", name: "DISCORD", file: "discord.svg", cornerColor: "blue" },
 ];

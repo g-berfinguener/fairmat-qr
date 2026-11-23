@@ -5,8 +5,9 @@ Make QR codes in the FAIRmat house style for posters, slides and flyers.
 ## How to use it
 
 1. **Paste your link** into the Link field.
+   Or choose a **Quick access link** for NOMAD Central, the NOMAD or FAIRmat website, or Discord. Each shortcut also selects its logo and corner colour.
 2. **Pick a logo** for the centre: FAIRmat, another team logo, or No logo.
-3. **Pick a corner colour:** green for NOMAD Oasis, gold for NOMAD CAMELS, blue for everything else.
+3. **Check the corner colour:** selecting a logo chooses its colour automatically, including green for NOMAD OASIS, gold for NOMAD CAMELS, and light blue for NOMAD PLUGINS. DISCORD uses the standard blue. You can pick a different colour at any time.
 4. **Download** as PNG for slides and Google Slides, or SVG for print and design tools.
 
 The download buttons only work once the page says **Scans correctly**. Every code is checked by a scanner first, so a downloaded code always works.
@@ -27,7 +28,7 @@ Everything happens in your browser. The links you type and the logos you add are
 2. Add a line for it in `logos/logos.js`, for example:
 
    ```js
-   { name: "NOMAD Oasis", file: "nomad-oasis.svg" },
+   { id: "nomad-oasis", name: "NOMAD OASIS", file: "nomad-oasis.svg", cornerColor: "green" },
    ```
 
 The new logo appears on the page a minute or two later.
